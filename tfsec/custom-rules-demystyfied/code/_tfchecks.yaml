@@ -1,0 +1,24 @@
+checks:
+  - code: my-aws_001
+    description: Check if the Environment tag is applied to resource
+    impact: Missing knowledge where the resource belongs might lead to mistakes
+    resolution: Add Environment tag with value ['Dev', 'Qa', 'Prod']
+    requiredTypes:
+      - resource
+    requiredLabels:
+      - aws_s3_bucket
+    severity: High
+    matchSpec:
+      name: tags
+      action: contains
+      value:
+        Environment:
+          action: isAny
+          value:
+            - Dev
+            - Qa
+            - Prod
+    errorMessage: Required tag Environment is missing
+    relatedLinks:
+      - https://google.com
+      - https://mydocumentation.io
